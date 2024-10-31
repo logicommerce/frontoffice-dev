@@ -1,44 +1,52 @@
 # LogiCommerce Front Office Dev Container
 
-## Prepare environment for Dev Containers
+## Preparing environment for Dev Containers
 
-Visual Studio Code documentation:
+For detailed instructions, refer to the Visual Studio Code documentation:
 <https://code.visualstudio.com/docs/devcontainers/containers>
 
 ### Configure Docker
 
+Ensure your system meets the system requirements for Dev Containers:
 <https://code.visualstudio.com/docs/devcontainers/containers#_system-requirements>
 
-### Install VSCode extension
+### Install the VSCode extension
 
-Required extension: [**Dev Containers**](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+Required extension: **Dev Containers**
+<https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers>
 
-## Initialize project
+## Project Initialization
 
-Create folder project.
+Create a folder project:
 
 ```console
 mkdir {yourCommerceProject}
 cd {yourCommerceProject}
 ```
 
-Clone repo to www:
+Clone the repository into the `www` folder:
 
 ```console
 git clone {commerce repo url} www
 ```
 
-Create `lc` folder
+### LC SDK and Framework
 
-In this folder, you can put the phar files:
+Create an `lc` folder. In this folder, place the following the following `phar`
+files:
 
 - sdk.phar
 - fwk.phar
 - plugins.phar
 
-Create folder `.devcontainer`.
+You can use `sdk` and `fwk` folders instead **phar** files. To do this, modify
+the `_settingsConfig.php` file to avoid using `phar` files.
 
-Inside the `.devcontainer` create `devcontainer.json` file:
+### Devcontainer configuration
+
+Create a `.devcontainer` folder.
+
+Inside the `.devcontainer/` create a `devcontainer.json` file:
 
 ```json
 {
@@ -64,14 +72,14 @@ Inside the `.devcontainer` create `devcontainer.json` file:
 }
 ```
 
-This devcontainer file will create an dev container environment with port 8888
-exposed, It will mount `www` and `lc` folders.
+This devcontainer file will create a dev container environment with port 8081
+exposed. It will mount `www` and `lc` folders.
 
 ## Commerce development configuration
 
-### Config files
+### Configuration files
 
-Put `_serviceConfig.php` and `_config.php` inside the `www` folder.
+Place `_serviceConfig.php` and `_config.php` inside the `www` folder.
 
 #### _serviceConfig.php
 
@@ -185,7 +193,7 @@ define('IMAGE_MISSING_BASKET_ITEM', 'not-found-basket.png');
 
 ```
 
-It is necessary replace all {{values}}
+Replace all instances of `{{values}}` with the appropriate values:
 
 - {{COMMERCE_ID}}
 - {{APP_ID}}
