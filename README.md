@@ -51,7 +51,7 @@ Inside the `.devcontainer/` create a `devcontainer.json` file:
 ```json
 {
   "name": "Commerce",
-  "image": "public.ecr.aws/b4h2l2b5/lc-frontoffice-development:latest",
+  "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development",
   "workspaceFolder": "/local/www",
   "forwardPorts": [8081],
   "customizations": {
