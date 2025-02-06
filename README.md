@@ -202,6 +202,15 @@ Replace all instances of `{{values}}` with the appropriate values:
 
 ### Update composer
 
-```console
+```bash
 composer update
+```
+
+
+### Possible troubles on first start
+
+In some cases, redis fails on start. You can start redis manually with this following command:
+
+```bash
+service redis-server restart
 ```
