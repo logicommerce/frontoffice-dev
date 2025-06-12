@@ -28,7 +28,7 @@ Create this project folder structure (the folder can be in Documents or anywhere
     - update.sh    <- copy this script from below [1]
   - commerces/
     - MyCommerce
-      - repo-xxx   <- `git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/repo-xxx`
+      - repo-xxx   <- `git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/repo-xxx` (xxx means a commerce id.)
     - Other commerces...
   - .devcontainer/
     - devcontainer.json  <- copy this json from below [2]
@@ -116,6 +116,7 @@ exit 0
     ]
 }
 ```
+Warning! Only copy the file. You don't need to modify any variable like `${localWorkspaceFolder}.`
 
 ## 5. Make update.sh executable
 
@@ -299,24 +300,37 @@ From inside the Docker container (VSCode window), run this command:
 The commerce is now available at [http://localhost:8081](http://localhost:8081).
 
 
-# Switching to a different commerce
+# Switching to a different commerce 
 
 Remember that you can only work on one commerce at a given time. To change the commerce, do the following:
 
-1. (ONLY FOR CLONING A NEW COMMERCE) Create a new folder inside `commerces`. Clone the new commerce inside.
+## If you already have the commerce configured.
 
-2. (ONLY FOR CLONING A NEW COMMERCE) Repeat step 7 (Prepare the commerce to develop) from the previous section.
+Run this command from your 'projects' folder. (Outside docker)
 
-3. (*ALWAYS*) Repeat step 8 (Select the commerce to develop) from the previous section, choose the new commerce.
+```sh
+ln -sfn commerces/OtherCommerce/repo-xxx www 
+```
 
-4. (*ALWAYS*) Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container"
+> (xxx means a commerce id.)
 
-5. (*ALWAYS*) Reload the browser page [http://localhost:8081](http://localhost:8081).
+Launch the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container" and reload the page.
+
+
+## If you are adding a new commerce
+
+1. Create a new folder inside `commerces`. Clone the new commerce inside.
+
+2. Repeat step 7 (Prepare the commerce to develop) and step 8 (Select the commerce to develop) from the previous section, choose the new commerce.
+
+4. Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container"
+
+5. Reload the browser page [http://localhost:8081](http://localhost:8081).
 
 
 # Additional notes
 
-### Using PHAR files instead of `sdk`, `fwk` and `plugins` repos 
+### Using PHAR files instead of 'sdk', 'fwk' and 'plugins' repos 
 
 Inside `lc` folder, place the following the following `phar` files:
 
