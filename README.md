@@ -5,12 +5,12 @@
 For detailed instructions, refer to the Visual Studio Code documentation:
 <https://code.visualstudio.com/docs/devcontainers/containers>
 
-### 2. Configure Docker
+## 2. Configure Docker
 
 Ensure your system meets the system requirements for Dev Containers:
 <https://code.visualstudio.com/docs/devcontainers/containers#_system-requirements>
 
-### 3. Install the VSCode extension
+## 3. Install the VSCode extension
 
 Required extension: **Dev Containers**
 <https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers>
@@ -117,13 +117,13 @@ exit 0
 }
 ```
 
-## 5. Make `update.sh` executable
+## 5. Make update.sh executable
 
 ```sh
 chmod +x lc/update.sh
 ```
 
-## 6. Populate `workspace`
+## 6. Populate workspace folder
 
 ```sh
 cd workspace
@@ -286,7 +286,7 @@ Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Re
 
 Wait for the docker image to get built and launched, it may take some minutes the first time.
 
-## 10. (Only when needed because of LC or WWW changes) Run `composer update`
+## 10. (Only when needed because of LC or WWW changes) Run 'composer update'
 
 From inside the Docker container (VSCode window), run this command:
 
@@ -294,7 +294,7 @@ From inside the Docker container (VSCode window), run this command:
 /local/lc/update.sh
 ```
 
-## 10. Visit your commerce in the browser
+## 11. Visit your commerce in the browser
 
 The commerce is now available at [http://localhost:8081](http://localhost:8081).
 
