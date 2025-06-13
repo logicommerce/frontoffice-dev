@@ -25,70 +25,18 @@ Create this project folder structure (the folder can be in Documents or anywhere
     - fwk/         <- 'git clone git@bitbucket.org:logicommerce/framework-php fwk'
     - sdk/         <- 'git clone git@bitbucket.org:logicommerce/sdk-php sdk'
     - plugins/     <- 'git clone git@bitbucket.org:logicommerce/plugins-php plugins'
-    - update.sh    <- copy this script from below [1]
   - commerces/
     - MyCommerce
-      - repo-xxx   <- `git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/repo-xxx` (xxx means a commerce id.)
+      - repo-xxx   <- 'git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/repo-xxx' (xxx means a commerce id.)
     - Other commerces...
   - .devcontainer/
-    - devcontainer.json  <- copy this json from below [2]
+    - devcontainer.json  <- copy this json from below
   - workspace
     (leave empty for now)
+  - use-commerce.sh      <- copy this script from below 
 ```
 
-[1] `update.sh` script:
-```sh
-#!/bin/bash
-
-localPath=$(pwd)
-
-function plugins {
-    export COMPOSER_ALLOW_SUPERUSER=1
-        echo "Updating Composer for all plugins"
-        cd $localPath/plugins
-        for d in ComLogicommerce*; do
-                echo "Updating $d"
-                cd $d
-                if [ ! -f "composer.json" ]; then
-                        echo "No composer.json found in $d"
-                        cd ..
-                        continue
-                fi
-                composer update <<< Y
-                cd ..
-        done
-    echo 'plugins'
-    cd $localPath/plugins
-    composer update <<< Y
-}
-
-function fwk {
-    echo 'fwk'
-    cd $localPath/fwk
-    composer update <<< Y
-}
-
-function sdk {
-    echo 'sdk'
-    cd $localPath/sdk
-    composer update <<< Y
-}
-
-function www {
-    echo 'www'
-    cd $localPath/../www
-    composer update <<< Y
-}
-
-sdk
-fwk
-plugins
-www
-cd $localPath
-exit 0
-```
-
-[2] `devcontainer.json`
+`devcontainer.json`
 
 ```json
 {
@@ -118,13 +66,40 @@ exit 0
 ```
 Warning! Only copy the file. You don't need to modify any variable like `${localWorkspaceFolder}.`
 
-## 5. Make update.sh executable
+`use-commerce.sh`
 
-```sh
-chmod +x lc/update.sh
+```bash
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <path-to-commerce>"
+    exit 1
+fi
+
+SCRIPT_DIR=$(dirname "$(realpath "$0")")
+COMMERCE_DIR=$(realpath "$1")
+cd "$SCRIPT_DIR"
+
+if [ ! -d "$COMMERCE_DIR" ]; then
+    echo "Error: Directory $COMMERCE_DIR does not exist"
+    exit 1
+fi
+if [ ! -f "$COMMERCE_DIR/index.php" ]; then
+    echo "Make sure you have chosen a valid commerce directory."
+    exit 1
+fi
+
+ln -sfn $COMMERCE_DIR www
+
+# Create assets symlink only if not using PHARs
+if [ -d "$SCRIPT_DIR/lc/fwk" ]; then
+    ln -sfn /local/lc/fwk/assets www/assets/core
+fi
 ```
 
-## 6. Populate workspace folder
+## 5. Populate workspace folder
+
+> **IMPORTANT:** Unless stated otherwise, all commands in this document should be run from the `projects` folder, outside the docker container.
 
 ```sh
 cd workspace
@@ -134,13 +109,7 @@ ln -s /local/lc/sdk sdk
 ln -s /local/lc/plugins plugins
 ```
 
-## 7. Prepare the commerce to develop
-
-Create a link for local assets:
-
-```sh
-ln -s /local/lc/fwk/assets commerces/MyCommerce/repo-xxx/assets/core
-```
+## 6. Prepare the commerce to develop
 
 Inside the commerce folder (`commerces/MyCommerce/repo-xxx`), create the following files:
 
@@ -277,7 +246,7 @@ Replace all instances of `{{values}}` with the appropriate values:
 You can only work on 1 commerce at a time.
 
 ```sh
-ln -sfn commerces/MyCommerce/repo-xxx www
+./use-commerce.sh commerces/MyCommerce/repo-xxx
 ```
 
 ## 9. Launch the project in VSCode
@@ -286,14 +255,6 @@ Open VSCode, select File > Open Folder... and pick your `projects` folder (the o
 Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Reopen in container"
 
 Wait for the docker image to get built and launched, it may take some minutes the first time.
-
-## 10. (Only when needed because of LC or WWW changes) Run 'composer update'
-
-From inside the Docker container (VSCode window), run this command:
-
-```sh
-/local/lc/update.sh
-```
 
 ## 11. Visit your commerce in the browser
 
@@ -306,15 +267,17 @@ Remember that you can only work on one commerce at a given time. To change the c
 
 ## If you already have the commerce configured.
 
-Run this command from your 'projects' folder. (Outside docker)
+**Step 1:** Run this command from your 'projects' folder. (Outside docker)
 
 ```sh
-ln -sfn commerces/OtherCommerce/repo-xxx www 
+./use-commerce.sh commerces/OtherCommerce/repo-xxx 
 ```
 
-> (xxx means a commerce id.)
+-  (xxx is some numeric commerce id.)
 
-Launch the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container" and reload the page.
+**Step 2:** Launch the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container".
+
+Reload the browser page ([http://localhost:8081](http://localhost:8081)) and you should see the new commerce.
 
 
 ## If you are adding a new commerce
