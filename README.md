@@ -26,12 +26,12 @@ Create this project folder structure (the folder can be in Documents or anywhere
     - sdk/         <- 'git clone git@bitbucket.org:logicommerce/sdk-php sdk'
     - plugins/     <- 'git clone git@bitbucket.org:logicommerce/plugins-php plugins'
   - commerces/
-    - MyCommerce
-      - repo-xxx   <- 'git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/repo-xxx' (xxx means a commerce id.)
+    - MyCommerce/
+      - repo-xxx/  <- 'git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/repo-xxx' (xxx means a commerce id.)
     - Other commerces...
   - .devcontainer/
     - devcontainer.json  <- copy this json from below
-  - workspace
+  - workspace/
     (leave empty for now)
   - use-commerce.sh      <- copy this script from below 
 ```
@@ -64,7 +64,9 @@ Create this project folder structure (the folder can be in Documents or anywhere
     ]
 }
 ```
-Warning! Only copy the file. You don't need to modify any variable like `${localWorkspaceFolder}.`
+
+> [!WARNING]
+> Only copy the file. You don't need to modify any variable like `${localWorkspaceFolder}.`
 
 `use-commerce.sh`
 
@@ -99,7 +101,8 @@ fi
 
 ## 5. Populate workspace folder
 
-> **IMPORTANT:** Unless stated otherwise, all commands in this document should be run from the `projects` folder, outside the docker container.
+> [!IMPORTANT]
+> Unless stated otherwise, all commands in this document should be run from the `projects` folder, outside the docker container.
 
 ```sh
 cd workspace
@@ -241,7 +244,7 @@ Replace all instances of `{{values}}` with the appropriate values:
 - {{ASSETS_CORE_VERSION}} (only if using PHARs)
 
 
-## 8. Select the commerce to develop
+## 7. Select the commerce to develop
 
 You can only work on 1 commerce at a time.
 
@@ -249,14 +252,14 @@ You can only work on 1 commerce at a time.
 ./use-commerce.sh commerces/MyCommerce/repo-xxx
 ```
 
-## 9. Launch the project in VSCode
+## 8. Launch the project in VSCode
 
 Open VSCode, select File > Open Folder... and pick your `projects` folder (the one containing `.devcontainer`).
 Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Reopen in container"
 
 Wait for the docker image to get built and launched, it may take some minutes the first time.
 
-## 11. Visit your commerce in the browser
+## 9. Visit your commerce in the browser
 
 The commerce is now available at [http://localhost:8081](http://localhost:8081).
 
@@ -284,7 +287,7 @@ Reload the browser page ([http://localhost:8081](http://localhost:8081)) and you
 
 1. Create a new folder inside `commerces`. Clone the new commerce inside.
 
-2. Repeat step 7 (Prepare the commerce to develop) and step 8 (Select the commerce to develop) from the previous section, choose the new commerce.
+2. Repeat step 6 (Prepare the commerce to develop) and step 7 (Select the commerce to develop) from the previous section, choose the new commerce.
 
 4. Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container"
 
