@@ -176,7 +176,7 @@ define('FWK_JS_VERSION', 'SITE');
 // Rewrite commerce host
 define('COMMERCE_PROTOCOL', 'https');
 define('COMMERCE_STORE_URL', 'http://localhost:8081');
-define('COMMERCE_HOST', "$COMMERCE_ID.studio.logicommerce.cloud");
+define('COMMERCE_HOST', COMMERCE_ID . ".studio.logicommerce.cloud");
 define('CDN_ASSETS_COMMERCE', '/assets');
 
 // Internal data storage with Redis
