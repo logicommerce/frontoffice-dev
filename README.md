@@ -156,6 +156,7 @@ require_once '_serviceConfig.php';
 // LOCAL Environment variables                            |
 // +------------------------------------------------------+
 define('DEVEL', true);
+define('DEV_CONTAINER', true);
 
 define('COMMERCE_ID', {{COMMERCE_ID}});
 
