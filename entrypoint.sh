@@ -6,7 +6,8 @@ set -e
 LOCAL_PATH="/local"
 LC_PATH="$LOCAL_PATH/lc"
 
-git config --global --add safe.directory "*"
+service apache2 start
+service redis-server start
 
 if [ ! -d "$LC_PATH" ]; then
     echo "LC directory not found at $LC_PATH, make sure you have mounted the local directory correctly."
@@ -55,7 +56,3 @@ sdk
 fwk
 plugins
 www
-
-
-service apache2 start
-service redis-server start
