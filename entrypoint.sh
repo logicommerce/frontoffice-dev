@@ -9,6 +9,8 @@ LC_PATH="$LOCAL_PATH/lc"
 service apache2 start
 service redis-server start
 
+git config --global --add safe.directory "*"
+
 if [ ! -d "$LC_PATH" ]; then
     echo "LC directory not found at $LC_PATH, make sure you have mounted the local directory correctly."
     exit 1
