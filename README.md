@@ -41,7 +41,7 @@ Create this project folder structure (the folder can be in Documents or anywhere
 ```json
 {
     "name": "Commerce",
-    "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development",
+    "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest",
     "workspaceFolder": "/local/workspace",
     "forwardPorts": [
         8081
