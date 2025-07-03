@@ -194,6 +194,19 @@ define('CDN_ASSETS_PLUGINS', 'https://assets-studio.logicommerce.cloud/plugins')
 // Comment out this line if you use PHARs
 define('FWK_JS_VERSION', 'SITE');
 
+// Adapt constants to the current environment
+define('DEV_CONTAINER', getenv('DEV_CONTAINER'));
+define('COMMERCE_STORE_URL', getenv('COMMERCE_STORE_URL'));
+define('COMMERCE_PROTOCOL', getenv('COMMERCE_PROTOCOL'));
+define('API_URL', getenv('API_URL'));
+define('GEOLOCATION_API_URL', getenv('GEOLOCATION_API_URL'));
+define('LMS_API_URL', getenv('LMS_API_URL'));
+define('CDN_ASSETS_URL', getenv('CDN_ASSETS_URL'));
+define('REDIS_HOST', getenv('REDIS_HOST'));
+define('REDIS_PORT', getenv('REDIS_PORT'));
+define('DATA_STORAGE_HOST', getenv('DATA_STORAGE_HOST'));
+define('DATA_STORAGE_PORT', getenv('DATA_STORAGE_PORT'));
+
 // +------------------------------------------------------+
 // | Default studio/cloud constants                       |
 // +------------------------------------------------------+
