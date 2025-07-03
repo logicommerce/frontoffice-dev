@@ -165,12 +165,14 @@ $commerceHost = $commerceId . ".studio.logicommerce.cloud";
 
 // Cloud production environment (http://cloud.localhost:8082) 
 // (Optional)
-// if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
-//     $appId = '{{CLOUD_APP_ID}}';
-//     $appKey = '{{CLOUD_APP_KEY}}';
-//     $commerceId = {{CLOUD_COMMERCE_ID}};
-//     $commerceHost = '{{CLOUD_COMMERCE_HOST}}';
-// }
+if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
+  var_dump('Cloud environment credentials are required.');
+  exit;
+  // $appId = '{{CLOUD_APP_ID}}';
+  // $appKey = '{{CLOUD_APP_KEY}}';
+  // $commerceId = '{{CLOUD_COMMERCE_ID}}';
+  // $commerceHost = '{{CLOUD_COMMERCE_HOST}}';
+}
 
 
 // +------------------------------------------------------+
