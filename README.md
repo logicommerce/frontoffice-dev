@@ -1,5 +1,8 @@
 # LogiCommerce Front Office Dev Container
 
+[For updates and latest changes, see NOTES.md](NOTES.md)
+
+
 ## 1. Preparing environment for Dev Containers
 
 For detailed instructions, refer to the Visual Studio Code documentation:
@@ -43,9 +46,7 @@ Create this project folder structure (the folder can be in Documents or anywhere
     "name": "Commerce",
     "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest",
     "workspaceFolder": "/local/workspace",
-    "forwardPorts": [
-        8081
-    ],
+    "forwardPorts": [8081, 8082],
     "customizations": {
         "vscode": {
             "extensions": [
@@ -153,47 +154,44 @@ define('THROW_CONNECTION_ERRORS', false);
 require_once '_serviceConfig.php';
 
 // +------------------------------------------------------+
+// COMMERCE CREDENTIALS
+// +------------------------------------------------------+
+
+// Studio development environment (http://studio.localhost:8081)
+$appId = '{{APP_ID}}';
+$appKey = '{{APP_KEY}}';
+$commerceId = '{{COMMERCE_ID}}';
+$commerceHost = $commerceId . ".studio.logicommerce.cloud";
+
+// Cloud production environment (http://cloud.localhost:8082) 
+// (Optional)
+// if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
+//     $appId = '{{CLOUD_APP_ID}}';
+//     $appKey = '{{CLOUD_APP_KEY}}';
+//     $commerceId = {{CLOUD_COMMERCE_ID}};
+//     $commerceHost = '{{CLOUD_COMMERCE_HOST}}';
+// }
+
+
+// +------------------------------------------------------+
 // LOCAL Environment variables                            |
 // +------------------------------------------------------+
 define('DEVEL', true);
-define('DEV_CONTAINER', true);
-
-define('COMMERCE_ID', {{COMMERCE_ID}});
-
-// API Credentials
-define('APP_ID', '{{APP_ID}}');
-define('APP_KEY', '{{APP_KEY}}');
+define('APP_ID', $appId);
+define('APP_KEY', $appKey);
+define('COMMERCE_ID', $commerceId);
+define('COMMERCE_HOST', $commerceHost);
+// Uncomment if you are not using HTTPS
+//define('COMMERCE_PROTOCOL', 'https');
 
 // assets
 // Uncomment this line if you use PHARs
 // define('CDN_ASSETS_CORE', 'https://assets-studio.logicommerce.cloud/core/{{ASSETS_CORE_VERSION}}');
-
 define('CDN_ASSETS_PLUGINS', 'https://assets-studio.logicommerce.cloud/plugins');
 
 // Enable to use CORE js from SITE project
 // Comment out this line if you use PHARs
 define('FWK_JS_VERSION', 'SITE');
-
-// Rewrite commerce host
-define('COMMERCE_PROTOCOL', 'https');
-define('COMMERCE_STORE_URL', 'http://localhost:8081');
-define('COMMERCE_HOST', COMMERCE_ID . ".studio.logicommerce.cloud");
-define('CDN_ASSETS_COMMERCE', '/assets');
-
-// Internal data storage with Redis
-define('REDIS_HOST', '127.0.0.1');
-define('REDIS_PORT', 6379);
-define('DATA_STORAGE_HOST', '127.0.0.1');
-define('DATA_STORAGE_PORT', 6379);
-
-// API connections
-define('API_URL', 'http://api-studio.logicommerce.cloud');
-define('API_URL_PORT', '');
-define('GEOLOCATION_API_URL', 'https://locations.logicommerce.com');
-define('GEOLOCATION_API_URL_PORT', '');
-define('LMS_API_URL', 'https://lms.logicommerce.com');
-define('LMS_API_URL_PORT', '');
-
 
 // +------------------------------------------------------+
 // | Default studio/cloud constants                       |
