@@ -33,25 +33,25 @@ function plugins {
         done
     echo 'plugins'
     cd $LC_PATH/plugins
-    composer update <<< Y
+    composer update <<< Y || true
 }
 
 function fwk {
     echo 'fwk'
     cd $LC_PATH/fwk
-    composer update <<< Y
+    composer update <<< Y || true
 }
 
 function sdk {
     echo 'sdk'
     cd $LC_PATH/sdk
-    composer update <<< Y
+    composer update <<< Y || true
 }
 
 function www {
     echo 'www'
     cd $LOCAL_PATH/www
-    composer update <<< Y
+    composer update <<< Y || true
 }
 
 sdk
