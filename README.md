@@ -174,7 +174,6 @@ if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
   // $commerceHost = '{{CLOUD_COMMERCE_HOST}}';
 }
 
-
 // +------------------------------------------------------+
 // LOCAL Environment variables                            |
 // +------------------------------------------------------+
