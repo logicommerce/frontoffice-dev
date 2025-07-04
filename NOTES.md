@@ -4,7 +4,7 @@
 Use the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container Without Cache".
 
 ### 2025/07/04
-Added a sandbox environment: [http://sandbox.localhost:8081] with the same configuration as the others.
+Added a sandbox environment: [http://sandbox.localhost:8080] with the same configuration as the others.
 
 ### 2025/07/03
 Some changes have been introduced to support two environments: Studio and Cloud. You can now access both environments simultaneously using the following links:
