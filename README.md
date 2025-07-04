@@ -46,7 +46,7 @@ Create this project folder structure (the folder can be in Documents or anywhere
     "name": "Commerce",
     "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest",
     "workspaceFolder": "/local/workspace",
-    "forwardPorts": [8081, 8082],
+    "forwardPorts": [8080, 8081, 8082],
     "customizations": {
         "vscode": {
             "extensions": [
@@ -172,6 +172,17 @@ if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
   // $appKey = '{{CLOUD_APP_KEY}}';
   // $commerceId = '{{CLOUD_COMMERCE_ID}}';
   // $commerceHost = '{{CLOUD_COMMERCE_HOST}}';
+}
+
+// Sandbox development environment (http://sandbox.localhost:8080)
+// (Optional)
+if (apache_request_headers()['X-ContainerEnv'] === 'SANDBOX') {
+  var_dump('Sandbox environment credentials are required.');
+  exit;
+  // $appId = '{{SANDBOX_APP_ID}}';
+  // $appKey = '{{SANDBOX_APP_KEY}}';
+  // $commerceId = '{{SANDBOX_COMMERCE_ID}}';
+  // $commerceHost = '{{SANDBOX_COMMERCE_HOST}}';
 }
 
 // +------------------------------------------------------+
