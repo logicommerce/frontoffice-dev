@@ -1,7 +1,8 @@
 
 ### To update the latest image
 
-Use the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container Without Cache".
+- [Ensure that you have the latest version of `devcontainer.json`.](README.md#2-configure-docker)
+- Use the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container Without Cache".
 
 ### 2025/07/04
 Added a sandbox environment: [http://sandbox.localhost:8080] with the same configuration as the others.

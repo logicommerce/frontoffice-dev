@@ -62,7 +62,8 @@ Create this project folder structure (the folder can be in Documents or anywhere
         "source=${localWorkspaceFolder}/workspace,target=/local/workspace,type=bind",
         "source=${localWorkspaceFolder}/www,target=/local/www,type=bind",
         "source=${localWorkspaceFolder}/lc,target=/local/lc,type=bind"
-    ]
+    ],
+    "runArgs": ["--pull", "always"],
 }
 ```
 
