@@ -31,7 +31,12 @@ RUN pecl install xdebug-3.2.0 && \
 
 # Enable apache and modules
 RUN update-rc.d apache2 enable && \
-    a2enmod rewrite headers
+    a2enmod rewrite headers ssl
+
+# Copy and install the self-signed certificates to Apache server
+RUN mkdir -p /etc/apache2/ssl
+COPY cert.crt /etc/apache2/ssl
+COPY cert.key /etc/apache2/ssl
 
 # Prepare Apache commerce configuration
 COPY ./commerce.conf /etc/apache2/sites-available/commerce.conf
