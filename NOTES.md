@@ -4,6 +4,9 @@
 - [Ensure that you have the latest version of `devcontainer.json`.](README.md#2-configure-docker)
 - Use the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container Without Cache".
 
+### 2025/07/24
+Use a non-root user to avoid permission problems.
+
 ### 2025/07/10
 Added SSL to avoid conflicts with third parties.
 

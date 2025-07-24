@@ -1,7 +1,7 @@
 FROM php:8.2-apache
 
 # Set php.ini configuration
-COPY ./php.ini /usr/local/etc/php/php.ini
+COPY dockerFiles/php.ini /usr/local/etc/php/php.ini
 
 # Modify policy-rc to allow services management (start/stop) correctly
 RUN sed -i 's/exit 101/exit 0/g' /usr/sbin/policy-rc.d
@@ -14,7 +14,7 @@ RUN apt-get -y update --fix-missing && \
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
     apt-get -y install --fix-missing apt-utils build-essential curl libcurl4 zip openssl \
         wget dialog jq procps git redis awscli zlib1g-dev libzip-dev libicu-dev libonig-dev \
-        libfreetype6-dev libjpeg62-turbo-dev libpng-dev
+        libfreetype6-dev libjpeg62-turbo-dev libpng-dev sudo
 
 # Install PHP Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -35,11 +35,11 @@ RUN update-rc.d apache2 enable && \
 
 # Copy and install the self-signed certificates to Apache server
 RUN mkdir -p /etc/apache2/ssl
-COPY cert.crt /etc/apache2/ssl
-COPY cert.key /etc/apache2/ssl
+COPY dockerFiles/cert.crt /etc/apache2/ssl
+COPY dockerFiles/cert.key /etc/apache2/ssl
 
 # Prepare Apache commerce configuration
-COPY ./commerce.conf /etc/apache2/sites-available/commerce.conf
+COPY dockerFiles/commerce.conf /etc/apache2/sites-available/commerce.conf
 RUN a2ensite commerce.conf && \
     rm /etc/apache2/sites-enabled/000-default.conf
 
@@ -51,8 +51,21 @@ RUN mkdir /local && \
     chown -R www-data:www-data /local/cache
 WORKDIR /local
 
-# Copy entrypoint script
-COPY entrypoint.sh /start.sh
-RUN chmod +x /start.sh
+# Create a non-root user for running the container
+ARG USERNAME=devuser
+ARG USER_UID=1000
+ARG USER_GID=1000
 
+RUN groupadd --gid $USER_GID $USERNAME \
+    && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
+
+RUN echo "devuser ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 *, /usr/sbin/service redis-server *" > /etc/sudoers.d/devuser-services \
+&& chmod 0440 /etc/sudoers.d/devuser-services
+
+# Copy scripts to the container
+COPY dockerFiles/entrypoint.sh /start.sh
+COPY dockerFiles/init.sh /init.sh
+RUN chmod +x /start.sh /init.sh
+
+USER devuser
 ENTRYPOINT ["/start.sh"]

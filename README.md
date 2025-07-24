@@ -72,34 +72,13 @@ Create this project folder structure (the folder can be in Documents or anywhere
 
 `use-commerce.sh`
 
-```bash
-#!/bin/bash
+A helper script to switch the active commerce for development. Download from here:
 
-if [ -z "$1" ]; then
-    echo "Usage: $0 <path-to-commerce>"
-    exit 1
-fi
+[use-commerce-sh (Linux)](examples/use-commerce.sh) / [use-commerce.bat (Windows)](examples/use-commerce.bat)
 
-SCRIPT_DIR=$(dirname "$(realpath "$0")")
-COMMERCE_DIR=$(realpath "$1")
-cd "$SCRIPT_DIR"
+Run this script from the `projects` folder each time you want to work on a different commerce and rebuild your container.
+You can adapt the script to your project structure, but make sure to respect the workspace folder structure and the creation of symbolic links.
 
-if [ ! -d "$COMMERCE_DIR" ]; then
-    echo "Error: Directory $COMMERCE_DIR does not exist"
-    exit 1
-fi
-if [ ! -f "$COMMERCE_DIR/index.php" ]; then
-    echo "Make sure you have chosen a valid commerce directory."
-    exit 1
-fi
-
-ln -sfn $COMMERCE_DIR www
-
-# Create assets symlink only if not using PHARs
-if [ -d "$SCRIPT_DIR/lc/fwk" ]; then
-    ln -sfn /local/lc/fwk/assets www/assets/core
-fi
-```
 
 ## 5. Populate workspace folder
 
