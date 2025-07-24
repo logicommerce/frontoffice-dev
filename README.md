@@ -45,6 +45,7 @@ Create this project folder structure (the folder can be in Documents or anywhere
 {
     "name": "Commerce",
     "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest",
+    "initializeCommand": "docker pull public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest || echo \"Pull failed — falling back to cached image.\"",
     "workspaceFolder": "/local/workspace",
     "forwardPorts": [8080, 8081, 8082],
     "customizations": {
@@ -62,13 +63,13 @@ Create this project folder structure (the folder can be in Documents or anywhere
         "source=${localWorkspaceFolder}/workspace,target=/local/workspace,type=bind",
         "source=${localWorkspaceFolder}/www,target=/local/www,type=bind",
         "source=${localWorkspaceFolder}/lc,target=/local/lc,type=bind"
-    ],
-    "runArgs": ["--pull", "always"],
+    ]
 }
 ```
 
 > [!WARNING]
 > Only copy the file. You don't need to modify any variable like `${localWorkspaceFolder}.`
+
 
 `use-commerce.sh`
 
