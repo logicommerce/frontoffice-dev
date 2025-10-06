@@ -63,7 +63,8 @@ Create this project folder structure (the folder can be in Documents or anywhere
         "source=${localWorkspaceFolder}/workspace,target=/local/workspace,type=bind",
         "source=${localWorkspaceFolder}/www,target=/local/www,type=bind",
         "source=${localWorkspaceFolder}/lc,target=/local/lc,type=bind"
-    ]
+    ],
+    "runArgs": ["--name", "lc-frontoffice-development"]
 }
 ```
 
@@ -138,13 +139,13 @@ require_once '_serviceConfig.php';
 // COMMERCE CREDENTIALS
 // +------------------------------------------------------+
 
-// Studio development environment (http://studio.localhost:8081)
+// Studio development environment (https://studio.localhost:8081)
 $appId = '{{APP_ID}}';
 $appKey = '{{APP_KEY}}';
 $commerceId = '{{COMMERCE_ID}}';
 $commerceHost = $commerceId . ".studio.logicommerce.cloud";
 
-// Cloud production environment (http://cloud.localhost:8082) 
+// Cloud production environment (https://cloud.localhost:8082) 
 // (Optional)
 if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
   var_dump('Cloud environment credentials are required.');
@@ -155,7 +156,7 @@ if (apache_request_headers()['X-ContainerEnv'] === 'CLOUD') {
   // $commerceHost = '{{CLOUD_COMMERCE_HOST}}';
 }
 
-// Sandbox development environment (http://sandbox.localhost:8080)
+// Sandbox development environment (https://sandbox.localhost:8080)
 // (Optional)
 if (apache_request_headers()['X-ContainerEnv'] === 'SANDBOX') {
   var_dump('Sandbox environment credentials are required.');
@@ -266,7 +267,7 @@ Wait for the docker image to get built and launched, it may take some minutes th
 
 ## 9. Visit your commerce in the browser
 
-The commerce is now available at [http://localhost:8081](http://localhost:8081).
+The commerce is now available at [https://localhost:8081](https://localhost:8081).
 
 
 # Switching to a different commerce 
@@ -285,7 +286,7 @@ Remember that you can only work on one commerce at a given time. To change the c
 
 **Step 2:** Launch the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container".
 
-Reload the browser page ([http://localhost:8081](http://localhost:8081)) and you should see the new commerce.
+Reload the browser page ([https://localhost:8081](https://localhost:8081)) and you should see the new commerce.
 
 
 ## If you are adding a new commerce
@@ -296,7 +297,7 @@ Reload the browser page ([http://localhost:8081](http://localhost:8081)) and you
 
 4. Launch the command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container"
 
-5. Reload the browser page [http://localhost:8081](http://localhost:8081).
+5. Reload the browser page [https://localhost:8081](https://localhost:8081).
 
 
 # Additional notes
@@ -313,6 +314,13 @@ Then modify the `_settingsConfig.php` files to avoid using `phar` files (set all
 
 Also modify `_config.php` (see comments containing "if you use PHARs").
 
+### Connect as root user to Docker
+
+By default, a non-root user is used to avoid permission issues. However, you can also connect as root using an external terminal:
+
+```bash
+docker exec -it -u root lc-frontoffice-development /bin/bash
+```
 
 ### Possible troubles on first start
 
