@@ -25,7 +25,7 @@ Create this project folder structure (the folder can be in Documents or anywhere
 ```console
 - projects/
   - lc/
-    - fwk/         <- 'git clone git clone https://github.com/logicommerce/framework-php.git fwk'
+    - fwk/         <- 'git clone https://github.com/logicommerce/framework-php.git fwk'
     - sdk/         <- 'git clone https://github.com/logicommerce/sdk-php.git sdk'
     - plugins/     <- 'git clone https://github.com/logicommerce/plugins-php.git plugins'
   - commerces/
