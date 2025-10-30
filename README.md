@@ -321,11 +321,3 @@ By default, a non-root user is used to avoid permission issues. However, you can
 ```bash
 docker exec -it -u root lc-frontoffice-development /bin/bash
 ```
-
-### Possible troubles on first start
-
-In some cases, redis fails on start. You can start redis manually with this following command:
-
-```bash
-service redis-server restart
-```
