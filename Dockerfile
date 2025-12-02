@@ -14,7 +14,7 @@ RUN apt-get -y update --fix-missing && \
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections && \
     apt-get -y install --fix-missing apt-utils build-essential curl libcurl4 zip openssl \
         wget dialog jq procps git redis awscli zlib1g-dev libzip-dev libicu-dev libonig-dev \
-        libfreetype6-dev libjpeg62-turbo-dev libpng-dev sudo
+        libfreetype6-dev libjpeg62-turbo-dev libpng-dev sudo gettext
 
 # Install PHP Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -38,18 +38,20 @@ RUN mkdir -p /etc/apache2/ssl
 COPY dockerFiles/cert.crt /etc/apache2/ssl
 COPY dockerFiles/cert.key /etc/apache2/ssl
 
-# Prepare Apache commerce configuration
-COPY dockerFiles/commerce.conf /etc/apache2/sites-available/commerce.conf
-RUN a2ensite commerce.conf && \
-    rm /etc/apache2/sites-enabled/000-default.conf
-
 # Create and set /local folders as the default folder
 RUN mkdir /local && \
     mkdir /local/logs && \
     mkdir /local/cache && \
+    mkdir /local/tmp && \
     chown -R www-data:www-data /local/logs && \
-    chown -R www-data:www-data /local/cache
+    chown -R www-data:www-data /local/cache && \
+    chown -R www-data:www-data /local/tmp
 WORKDIR /local
+
+# Prepare Apache commerce configuration
+COPY dockerFiles/vhost.template /local/tmp/vhost.template
+COPY dockerFiles/create-vhosts.sh /local/tmp/create-vhosts.sh
+RUN chmod +x /local/tmp/create-vhosts.sh
 
 # Create a non-root user for running the container
 ARG USERNAME=devuser
@@ -59,7 +61,7 @@ ARG USER_GID=1000
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME
 
-RUN echo "devuser ALL=(ALL) NOPASSWD: /usr/sbin/service apache2 *, /usr/sbin/service redis-server *" > /etc/sudoers.d/devuser-services \
+RUN echo "devuser ALL=(ALL) NOPASSWD: /local/tmp/create-vhosts.sh, /usr/sbin/service apache2 *, /usr/sbin/service redis-server *" > /etc/sudoers.d/devuser-services \
 && chmod 0440 /etc/sudoers.d/devuser-services
 
 # Copy scripts to the container

@@ -47,7 +47,10 @@ Create this project folder structure (the folder can be in Documents or anywhere
     "image": "public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest",
     "initializeCommand": "docker pull public.ecr.aws/logicommerce-studio/lc-frontoffice-development:latest || echo \"Pull failed — falling back to cached image.\"",
     "workspaceFolder": "/local/workspace",
-    "forwardPorts": [8080, 8081, 8082],
+    "forwardPorts": [8081, 8082, 8080],
+    "containerEnv": {
+    	"VHOSTS": "studio:8081;cloud:8082;sandbox:8080"
+    },
     "customizations": {
         "vscode": {
             "extensions": [

@@ -1,0 +1,29 @@
+Listen ${PORT}
+<VirtualHost *:${PORT}>
+	SSLEngine on
+	SSLCertificateFile /etc/apache2/ssl/cert.crt
+	SSLCertificateKeyFile /etc/apache2/ssl/cert.key
+	ServerName localhost
+	ServerAdmin webmaster@localhost
+	DocumentRoot /local/www
+	<Directory /local/www>
+		DirectoryIndex index.php
+		IndexIgnore *
+		AllowOverride FileInfo
+		Require all granted
+		SetEnv DEV_CONTAINER true
+		SetENV GEOLOCATION_API_URL https://locations.logicommerce.com
+		SetENV LMS_API_URL https://lms.logicommerce.com
+		SetEnv CDN_ASSETS_URL /assets
+		SetEnv REDIS_HOST 127.0.0.1
+		SetEnv REDIS_PORT 6379
+		SetEnv DATA_STORAGE_HOST 127.0.0.1
+		SetEnv DATA_STORAGE_PORT 6379
+		SetEnv COMMERCE_PROTOCOL https
+		SetEnv COMMERCE_STORE_URL https://${ENVNAME}.localhost:${PORT}
+        SetEnv API_URL http://api-studio.logicommerce.cloud
+	</Directory>
+	RequestHeader set X-ContainerEnv "${ENVNAME_UP}"
+	ErrorLog ${APACHE_LOG_DIR}/error-${ENVNAME}.log
+	CustomLog ${APACHE_LOG_DIR}/access-${ENVNAME}.log combined
+</VirtualHost>
