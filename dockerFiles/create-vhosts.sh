@@ -9,6 +9,8 @@ mkdir -p "$APACHE_LOG_DIR"
 INPUT="$1"
 echo "[create-vhosts] VHOSTS='$INPUT'"
 
+API="http://api-studio.logicommerce.cloud"
+
 a2dissite 000-default.conf >/dev/null 2>&1 || true
 
 IFS=';' read -ra ITEMS <<< "${INPUT}"
@@ -19,9 +21,12 @@ for item in "${ITEMS[@]}"; do
         DOCROOT="/local/www/${ENVNAME}"
     fi
     ENVNAME_UP=$(echo "$ENVNAME" | tr '[:lower:]' '[:upper:]')
-    export ENVNAME ENVNAME_UP PORT DOCROOT APACHE_LOG_DIR
+    if [ "$ENVNAME_UP" = "CLOUD" ]; then
+        API="http://api.logicommerce.cloud"
+    fi
+    export API ENVNAME ENVNAME_UP PORT DOCROOT APACHE_LOG_DIR
     dest="${OUTDIR}/${ENVNAME}.conf"
-    envsubst '${ENVNAME} ${ENVNAME_UP} ${PORT} ${DOCROOT} ${APACHE_LOG_DIR}' \
+    envsubst '${API} ${ENVNAME} ${ENVNAME_UP} ${PORT} ${DOCROOT} ${APACHE_LOG_DIR}' \
         < "${TEMPLATE}" > "${dest}"
     a2ensite "$(basename "${dest}")"
 done

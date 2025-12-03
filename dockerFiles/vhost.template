@@ -21,7 +21,7 @@ Listen ${PORT}
 		SetEnv DATA_STORAGE_PORT 6379
 		SetEnv COMMERCE_PROTOCOL https
 		SetEnv COMMERCE_STORE_URL https://${ENVNAME}.localhost:${PORT}
-        SetEnv API_URL http://api-studio.logicommerce.cloud
+        SetEnv API_URL ${API}
 	</Directory>
 	RequestHeader set X-ContainerEnv "${ENVNAME_UP}"
 	ErrorLog ${APACHE_LOG_DIR}/error-${ENVNAME}.log
