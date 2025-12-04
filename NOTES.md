@@ -1,7 +1,7 @@
 
 ### To update the latest image
 
-- [Ensure that you have the latest version of `devcontainer.json`.](README.md#2-configure-docker)
+- [Ensure that you have the latest version of `devcontainer.json`.](FRONTDEV.md#2-configure-docker)
 - Use the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container Without Cache".
 
 ### 2025/12/02
