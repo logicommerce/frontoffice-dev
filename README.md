@@ -40,25 +40,27 @@ The extension will create and manage the necessary structure and configuration f
 
 ---
 
-## Compatibility with frontoffice-dev
+#### Compatibility with `frontoffice-dev`
 
 This extension is fully compatible with the public `frontoffice-dev` template if you follow that model:
 
-- Repository: `logicommerce/frontoffice-dev`
+- Repository: [`logicommerce/frontoffice-dev`](https://github.com/logicommerce/frontoffice-dev)
 
-If your project has been created following the `frontoffice-dev` [structure](FRONTDEV.md#4-project-initialization), Logicommerce Studio will:
+If your project has been created following the `frontoffice-dev` structure, Logicommerce Studio will detect and reuse it and will keep the `www` symlink and core assets pointing to the correct locations.
 
-- Detect and reuse the existing workspace.  
-- Keep the `www` symlink and core assets pointing to the correct locations (no scripts needed).
+If you reuse your old workspace:
 
-If you reuse this workspace inside a Dev Container, you must add the extension to your `devcontainer.json`:
+- If you manage the lc folder manually, clone the latest versions of the SDK, framework, and PHP plugin from GitHub to keep it up to date.
+- Add the extension to your `devcontainer.json`.
 
 ```jsonc
 "customizations": {
   "vscode": {
     "extensions": [
-      // other extensions...
+      ...
       "logicommerce.logicommerce-studio-extension"
     ]
   }
 }
+```
+---
