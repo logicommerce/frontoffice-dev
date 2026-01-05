@@ -73,6 +73,6 @@ If you reuse your old workspace:
 - If you want to use the panel to configure connections, delete your local `config.php` file and reconfigure it.  
   You only need the credentials to access your commerce.
 
-  ![alt text](images/credentials.png)
+  ![Credentials](images/credentials.png)
   
 ---
