@@ -13,10 +13,12 @@ Work with LogiCommerce headless front-office projects in a local Dev Container e
 
 This extension automates the common workflow for LogiCommerce front-office development:
 
-- Initialize a local Dev Container environment.  
-- Add and manage multiple commerces.  
-- Switch the active commerce easily.  
-- Use helper commands both inside and outside the Dev Container.
+- Quickly initialize a local Dev Container environment.
+- Add, manage, and switch between multiple commerce projects with ease.
+- Access convenient helper commands both inside and outside the Dev Container.
+- Effortlessly open your local commerce, copy its URL, and edit configuration settings as needed.
+
+![Logicommerce Studio](images/view1.png)
 
 ### Requirements
 
@@ -50,6 +52,8 @@ If your project has been created following the `frontoffice-dev` structure, Logi
 
 If you reuse your old workspace:
 
+##### On Host
+
 - If you manage the lc folder manually, clone the latest versions of the SDK, framework, and PHP plugin from GitHub to keep it up to date.
 - Add the extension to your `devcontainer.json`.
 
@@ -63,4 +67,12 @@ If you reuse your old workspace:
   }
 }
 ```
+
+##### Inside Dev Container
+
+- If you want to use the panel to configure connections, delete your local `config.php` file and reconfigure it.  
+  You only need the credentials to access your commerce.
+
+  ![alt text](images/credentials.png)
+  
 ---
