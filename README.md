@@ -1,33 +1,18 @@
 # LogiCommerce frontoffice-dev
 
-This repository contains the base Dev Container template used for LogiCommerce headless front-office projects.
+This repository contains the base Dev Container template for building and testing LogiCommerce headless front-office projects. It provides a pre-configured PHP + Apache + Redis environment that runs locally and connects to the LogiCommerce APIs.
 
-The recommended way to work with this template now is to use the **Logicommerce Studio** VS Code extension, which automates the setup and daily workflow. Manual setup is still possible and is documented in [this separate guide](FRONTDEV.md).
+The default configuration reflects how agencies typically work today. You can use it as-is, extend the image, or override settings at the commerce level to fit your specific workflow.
+
+Multiple environments can be configured simultaneously to work as independent sandboxes, useful for testing the same code against different commerce configurations. By convention, only the environment named `cloud` connects to the production API; all other environments connect to the Studio API.
+
+The recommended way to work with this template is through the **LogiCommerce Studio** VS Code extension, which automates the full setup and daily workflow. If you prefer to set things up manually or want a deeper understanding of how the container works, refer to [FRONTDEV.md](FRONTDEV.md).
 
 ---
 
-## Recommended: Logicommerce Studio extension
-
-**Logicommerce Studio**  
-Work with LogiCommerce headless front-office projects in a local Dev Container environment, reusing the same structure and workflows as the official LogiCommerce front-office template.
-
-This extension automates the common workflow for LogiCommerce front-office development:
-
-- Quickly initialize a local Dev Container environment.
-- Add, manage, and switch between multiple commerce projects with ease.
-- Access convenient helper commands both inside and outside the Dev Container.
-- Effortlessly open your local commerce, copy its URL, and edit configuration settings as needed.
+## Recommended: Use Logicommerce Studio extension
 
 ![Logicommerce Studio](images/view1.png)
-
-### Requirements
-
-- Docker installed and running.  
-- Visual Studio Code with:
-  - Dev Containers extension (formerly Remote - Containers).
-
-There is no mandatory project structure required to start using this extension.  
-You can start from an empty folder and let the extension create what it needs.
 
 ### How to use it
 
@@ -44,13 +29,9 @@ The extension will create and manage the necessary structure and configuration f
 
 #### Compatibility with `frontoffice-dev`
 
-This extension is fully compatible with the public `frontoffice-dev` template if you follow that model:
+This extension is fully compatible with the public `frontoffice-dev` model if you follow it. If your project has been created following the `frontoffice-dev` structure, Logicommerce Studio will detect and reuse it, keeping the `www` symlink and core assets pointing to the correct locations.
 
-- Repository: [`logicommerce/frontoffice-dev`](https://github.com/logicommerce/frontoffice-dev)
-
-If your project has been created following the `frontoffice-dev` structure, Logicommerce Studio will detect and reuse it and will keep the `www` symlink and core assets pointing to the correct locations.
-
-If you reuse your old workspace:
+If you want to reuse the workspace, follow these tips:
 
 ##### On Host
 
