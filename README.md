@@ -14,6 +14,9 @@ The recommended way to work with this template is through the **LogiCommerce Stu
 
 ![Logicommerce Studio](images/view1.png)
 
+> [!NOTE]
+> On **Windows**, use the extension from a **WSL (Remote-WSL)** session with the project stored in the WSL filesystem - it does not work on native Windows. See [WINDOWS-WSL.md](WINDOWS-WSL.md) for the one-time setup.
+
 ### How to use it
 
 1. Install the **Logicommerce Studio** extension from the VS Code Marketplace.  

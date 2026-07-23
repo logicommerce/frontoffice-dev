@@ -4,6 +4,14 @@ This is a manual setup of Dev Container template. The recommended way to work wi
 
 [For updates and latest changes, see NOTES.md](NOTES.md)
 
+> [!IMPORTANT]
+> On **Windows**, run this **inside WSL2 (Linux)** with the project stored in the WSL filesystem. Reasons:
+> - Docker runs on Linux, so it's best to keep the containers and the project on the Linux side.
+> - It performs much better when the project lives on the WSL native filesystem, instead of on the Windows drive (`/mnt/c/...`), which is significantly slower for container I/O.
+> - The setup relies on POSIX symbolic links (`ln -s`) and shell commands that only behave correctly on Linux.
+>
+> See [WINDOWS-WSL.md](WINDOWS-WSL.md) to set up WSL first, then come back here.
+
 ## 1. Preparing environment for Dev Containers
 
 For detailed instructions, refer to the Visual Studio Code documentation:
@@ -81,7 +89,9 @@ Create this project folder structure (the folder can be in Documents or anywhere
 
 A helper script to switch the active commerce for development. Download from here:
 
-[use-commerce-sh (Linux)](examples/use-commerce.sh) / [use-commerce.bat (Windows)](examples/use-commerce.bat)
+[use-commerce.sh](examples/use-commerce.sh)
+
+On Windows, run it from the Ubuntu (WSL) terminal - see [WINDOWS-WSL.md](WINDOWS-WSL.md).
 
 Run this script from the `projects` folder each time you want to work on a different commerce and rebuild your container.
 You can adapt the script to your project structure, but make sure to respect the workspace folder structure and the creation of symbolic links.

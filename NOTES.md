@@ -4,6 +4,9 @@
 - [Ensure that you have the latest version of `devcontainer.json`.](FRONTDEV.md#2-configure-docker)
 - Use the VSCode command picker with `Ctrl + Shift + P` and select "Dev Containers: Rebuild Container Without Cache".
 
+### 2026/06/26
+Published a **multi-arch** build of the compiled image, so there are no compatibility issues on **ARM** processors (e.g. Apple Silicon). Pull the latest image (or rebuild the container without cache) to get the variant that matches your architecture.
+
 ### 2025/12/02
 Add the optional `VHOSTS` environment variable to `devcontainer.json` to create environments.
 The default value matches the configuration file and the examples explained in the documentation.
