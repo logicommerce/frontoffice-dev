@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.5-apache
 
 # Set php.ini configuration
 COPY dockerFiles/php.ini /usr/local/etc/php/php.ini
@@ -20,7 +20,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install PHP Extensions
-RUN pecl install xdebug-3.2.0 && \
+RUN pecl install xdebug-3.5.3 && \
     docker-php-ext-enable xdebug && \
     docker-php-ext-install zip && \
     docker-php-ext-install -j$(nproc) intl && \
